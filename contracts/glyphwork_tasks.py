@@ -34,6 +34,7 @@ RESULT_INCONCLUSIVE = "INCONCLUSIVE"
 RESULT_UNAVAILABLE = "UNAVAILABLE"
 
 
+@allow_storage
 @dataclass
 class Bounty:
     id: str
@@ -43,7 +44,7 @@ class Bounty:
     source_url: str
     expected_hash: str
     schema_mode: str
-    field_labels: list[str]
+    field_labels: DynArray[str]
     transcription_rules: str
     reward_wei: u256
     deadline: u256
@@ -57,6 +58,7 @@ class Bounty:
     source_unavailable_at: u256
 
 
+@allow_storage
 @dataclass
 class Submission:
     id: str
@@ -100,8 +102,6 @@ class Contract(gl.Contract):
         self.vault = Address("0x0000000000000000000000000000000000000000")
         self.bounty_count = u256(0)
         self.submission_count = u256(0)
-        self.bounties = TreeMap[str, Bounty]()
-        self.submissions = TreeMap[str, Submission]()
 
     @gl.public.write
     def set_vault_once(self, vault: Address) -> None:
@@ -156,7 +156,7 @@ class Contract(gl.Contract):
             canonical_url,
             expected,
             schema_mode,
-            labels,
+            _to_dynarray(labels),
             transcription_rules,
             str(reward),
             str(deadline),
@@ -277,7 +277,7 @@ class Contract(gl.Contract):
         source_url = bounty.source_url
         expected_hash = bounty.expected_hash
         schema_mode = bounty.schema_mode
-        labels = list(bounty.field_labels)
+        labels = [label for label in bounty.field_labels]
         rules = bounty.transcription_rules
         accept_minor_errors = bounty.accept_minor_errors
         transcription = submission.transcription
@@ -436,6 +436,13 @@ def _normalize_fields(fields: list[str], schema_mode: str) -> list[str]:
         if field not in seen:
             seen.append(field)
     return seen
+
+
+def _to_dynarray(items: list[str]) -> DynArray[str]:
+    values = gl.storage.inmem_allocate(DynArray[str])
+    for item in items:
+        values.append(item)
+    return values
 
 
 def _definition_hash(*parts: str) -> str:

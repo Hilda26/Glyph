@@ -36,6 +36,12 @@ NEXT_PUBLIC_STUDIONET_CHAIN_ID=61999
 - `contracts/glyphwork_tasks.py`: task definitions, source immutability, submissions, independent image-based evaluation, acceptance policy, expiry/refund trigger.
 - `contracts/glyphwork_vault.py`: fixed GEN custody, exact funding, accepted-worker payout, expiry/source-unavailable refunds, conservation accounting.
 
+Current Studionet deployment:
+
+- Tasks: `0x0fcbeFD1D4e0B36f57E8F9B0d143F3FFc1c5D593`
+- Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
+- Evidence: `docs/deployment-evidence/latest.json`
+
 Deploy order:
 
 1. Deploy `glyphwork_tasks.py`.
@@ -72,4 +78,3 @@ npm run build
 ```
 
 Playwright is available with `npm run test:e2e`.
-

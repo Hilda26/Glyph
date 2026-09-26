@@ -27,6 +27,7 @@ class Recipient:
         pass
 
 
+@allow_storage
 @dataclass
 class Deposit:
     bounty_id: str
@@ -45,7 +46,6 @@ class Contract(gl.Contract):
 
     def __init__(self, tasks: Address):
         self.tasks = tasks
-        self.deposits = TreeMap[str, Deposit]()
         self.credited_total = u256(0)
         self.paid_total = u256(0)
         self.refunded_total = u256(0)
@@ -121,4 +121,3 @@ class Contract(gl.Contract):
     @gl.public.view
     def conservation(self) -> tuple[u256, u256, u256, u256]:
         return (self.credited_total, self.paid_total, self.refunded_total, self.credited_total - self.paid_total - self.refunded_total)
-

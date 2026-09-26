@@ -12,9 +12,16 @@ Glyphwork is locally complete and verified:
 - Wallet connect, wrong-network guard, transaction lifecycle, and explorer links.
 - Unit/component tests, contract preflight checks, CI, production build, and Playwright smoke tests.
 
+## Deployed Contracts
+
+- Network: Studionet `61999`
+- Tasks: `0x0fcbeFD1D4e0B36f57E8F9B0d143F3FFc1c5D593`
+- Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
+- Evidence: `docs/deployment-evidence/latest.json`
+
 ## Before Final Submission
 
-1. Deploy with a funded Studionet signer:
+1. Optional redeploy with a funded Studionet signer:
 
 ```bash
 $env:GLYPHWORK_DEPLOYER_PRIVATE_KEY="0x..."
@@ -49,8 +56,8 @@ NEXT_PUBLIC_STUDIONET_CHAIN_ID=61999
 - authoritative readbacks;
 - a short screen recording or screenshots of the live path.
 
-## Known External Blockers
+## Remaining Polish Before Judging
 
-- A funded Studionet signer is required for deployment and live bounty evidence.
-- GitHub push requires valid authentication for `Hilda26`.
-
+- Run one funded demo bounty through create, fund, open, submit, evaluate, and payout/refund.
+- Append those lifecycle transactions and readbacks to `docs/deployment-evidence/latest.json`.
+- Add screenshots or a short recording of the live demo path if the submission portal supports media.

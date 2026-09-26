@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createAccount, createClient } from "genlayer-js";
 import { studionet } from "genlayer-js/chains";
-import { ExecutionResult, TransactionStatus } from "genlayer-js/types";
+import { CalldataAddress, ExecutionResult, TransactionStatus } from "genlayer-js/types";
 
 const rpc = process.env.GENLAYER_RPC ?? "https://studio.genlayer.com/api";
 if (rpc !== "https://studio.genlayer.com/api") {
@@ -33,14 +33,34 @@ async function wait(client, hash, label) {
     interval: 5_000,
     retries: 180,
   });
-  if (receipt.txExecutionResultName !== ExecutionResult.FINISHED_WITH_RETURN) {
-    throw new Error(`${label} finalized without successful execution: ${receipt.statusName} / ${receipt.txExecutionResultName}`);
+  const statusName = receipt.statusName ?? receipt.status_name;
+  const resultName = receipt.resultName ?? receipt.result_name;
+  const executionName = receipt.txExecutionResultName ?? receipt.tx_execution_result_name;
+  const leaderReceipts = receipt.consensus_data?.leader_receipt ?? [];
+  const contractErrors = leaderReceipts.filter((entry) => entry.execution_result === "ERROR" || entry.result?.status === "contract_error");
+  if (contractErrors.length > 0) {
+    const stderr = contractErrors[0].genvm_result?.stderr ?? contractErrors[0].result?.payload ?? "contract_error";
+    throw new Error(`${label} contract execution failed: ${String(stderr).slice(0, 1200)}`);
+  }
+  if (executionName && executionName !== ExecutionResult.FINISHED_WITH_RETURN) {
+    throw new Error(`${label} finalized without successful execution: ${statusName} / ${executionName}`);
+  }
+  if (statusName && statusName !== TransactionStatus.FINALIZED) {
+    throw new Error(`${label} did not finalize: ${statusName}`);
+  }
+  if (resultName && resultName !== "MAJORITY_AGREE") {
+    throw new Error(`${label} consensus result was not majority agree: ${resultName}`);
   }
   return receipt;
 }
 
 function deployedAddress(receipt) {
   return receipt.recipient ?? receipt.to_address ?? receipt.txDataDecoded?.contractAddress ?? receipt.data?.contract_address ?? receipt.data?.contractAddress;
+}
+
+function calldataAddress(address) {
+  const clean = address.replace(/^0x/i, "");
+  return new CalldataAddress(Uint8Array.from(Buffer.from(clean, "hex")));
 }
 
 const account = createAccount(privateKey);
@@ -54,15 +74,25 @@ console.log(`Deploying from ${account.address} to Studionet 61999...`);
 console.log(`tasks bytes=${sources.tasks.length} sha256=${sourceEvidence(sources.tasks).sha256}`);
 console.log(`vault bytes=${sources.vault.length} sha256=${sourceEvidence(sources.vault).sha256}`);
 
-const tasksTx = await client.deployContract({ account, code: sources.tasks.toString("utf8") });
-console.log(`Tasks deploy tx: ${tasksTx}`);
-const tasksReceipt = await wait(client, tasksTx, "Tasks deployment");
-const tasksAddress = deployedAddress(tasksReceipt);
+let tasksTx = process.env.GLYPHWORK_EXISTING_TASKS_TX;
+let tasksReceipt = null;
+let tasksAddress = process.env.GLYPHWORK_EXISTING_TASKS_ADDRESS;
+if (tasksAddress) {
+  console.log(`Reusing existing Tasks contract: ${tasksAddress}`);
+  if (tasksTx) {
+    tasksReceipt = await wait(client, tasksTx, "Existing Tasks deployment");
+  }
+} else {
+  tasksTx = await client.deployContract({ account, code: sources.tasks.toString("utf8") });
+  console.log(`Tasks deploy tx: ${tasksTx}`);
+  tasksReceipt = await wait(client, tasksTx, "Tasks deployment");
+  tasksAddress = deployedAddress(tasksReceipt);
+}
 if (!tasksAddress) {
   throw new Error("Tasks deployment finalized, but the SDK receipt did not expose a contract address. Inspect deployment-evidence/latest.json for the raw receipt.");
 }
 
-const vaultTx = await client.deployContract({ account, code: sources.vault.toString("utf8"), args: [tasksAddress] });
+const vaultTx = await client.deployContract({ account, code: sources.vault.toString("utf8"), args: [calldataAddress(tasksAddress)] });
 console.log(`Vault deploy tx: ${vaultTx}`);
 const vaultReceipt = await wait(client, vaultTx, "Vault deployment");
 const vaultAddress = deployedAddress(vaultReceipt);
@@ -74,7 +104,7 @@ const bindTx = await client.writeContract({
   account,
   address: tasksAddress,
   functionName: "set_vault_once",
-  args: [vaultAddress],
+  args: [calldataAddress(vaultAddress)],
   value: 0n,
 });
 console.log(`set_vault_once tx: ${bindTx}`);

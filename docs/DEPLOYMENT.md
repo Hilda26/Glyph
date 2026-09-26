@@ -47,4 +47,19 @@ The script reads the key from process environment, deploys Tasks, deploys Vault 
 
 ## Current Deployment Status
 
-No funded signer was available in this build environment, so live deployment evidence is not recorded here. That is the single external blocker for real addresses and explorer links.
+Deployed to Studionet 61999.
+
+- Signer: `0xd5Fbe8dbfFdac681FA50Ed8D082d70Ce43080B1C`
+- Tasks: `0x0fcbeFD1D4e0B36f57E8F9B0d143F3FFc1c5D593`
+- Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
+- Tasks deploy tx: `0x99d7c1bda1fb011556d1fcd0e3b19e4bf4c2b79c2b3b88a6ffdf3de7d3105b44`
+- Vault deploy tx: `0x5fccde3cd1f60099674629998f70a1e9bafdf0a68d2c2fcc08b5895a4a9e898e`
+- Vault binding tx: `0x0c66363f08e2b5be3eed01492dbf4dcef720f9063e32e86635488074ad076b63`
+
+Initial readbacks:
+
+- `get_bounty_count()`: `0`
+- `get_submission_count()`: `0`
+- `conservation()`: `[0, 0, 0, 0]`
+
+Full deployment receipts and schemas are recorded in `docs/deployment-evidence/latest.json`.

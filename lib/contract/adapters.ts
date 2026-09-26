@@ -155,7 +155,7 @@ function normalizeBounty(raw: unknown): BountySummary {
     sourceUrl: String(valueOf(item, "sourceUrl", "source_url") ?? ""),
     expectedHash: String(valueOf(item, "expectedHash", "expected_hash") ?? ""),
     schemaMode: String(valueOf(item, "schemaMode", "schema_mode") ?? "PLAIN_TEXT") as BountySummary["schemaMode"],
-    fieldLabels: (valueOf(item, "fieldLabels", "field_labels") as string[] | undefined) ?? [],
+    fieldLabels: parseFieldLabels(valueOf(item, "fieldLabels", "field_labels") ?? valueOf(item, "fieldLabelsJson", "field_labels_json")),
     rewardWei: asBigInt(valueOf(item, "rewardWei", "reward_wei")),
     deadline: Number(valueOf(item, "deadline", "deadline") ?? 0),
     attempts: Number(valueOf(item, "attempts", "attempts") ?? 0),
@@ -163,6 +163,19 @@ function normalizeBounty(raw: unknown): BountySummary {
     status: String(valueOf(item, "status", "status") ?? "DRAFT") as BountySummary["status"],
     definitionHash: String(valueOf(item, "definitionHash", "definition_hash") ?? ""),
   };
+}
+
+function parseFieldLabels(value: unknown): string[] {
+  if (Array.isArray(value)) return value.map(String);
+  if (typeof value === "string" && value.length > 0) {
+    try {
+      const parsed = JSON.parse(value) as unknown;
+      return Array.isArray(parsed) ? parsed.map(String) : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
 }
 
 function normalizeSubmission(raw: unknown): SubmissionReceipt {

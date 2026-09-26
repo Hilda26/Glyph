@@ -44,7 +44,7 @@ class Bounty:
     source_url: str
     expected_hash: str
     schema_mode: str
-    field_labels: DynArray[str]
+    field_labels_json: str
     transcription_rules: str
     reward_wei: u256
     deadline: u256
@@ -156,7 +156,7 @@ class Contract(gl.Contract):
             canonical_url,
             expected,
             schema_mode,
-            _to_dynarray(labels),
+            json.dumps(labels),
             transcription_rules,
             str(reward),
             str(deadline),
@@ -171,7 +171,7 @@ class Contract(gl.Contract):
             canonical_url,
             expected,
             schema_mode,
-            labels,
+            json.dumps(labels),
             transcription_rules,
             reward,
             u256(deadline),
@@ -277,7 +277,7 @@ class Contract(gl.Contract):
         source_url = bounty.source_url
         expected_hash = bounty.expected_hash
         schema_mode = bounty.schema_mode
-        labels = [label for label in bounty.field_labels]
+        labels = json.loads(bounty.field_labels_json)
         rules = bounty.transcription_rules
         accept_minor_errors = bounty.accept_minor_errors
         transcription = submission.transcription
@@ -436,13 +436,6 @@ def _normalize_fields(fields: list[str], schema_mode: str) -> list[str]:
         if field not in seen:
             seen.append(field)
     return seen
-
-
-def _to_dynarray(items: list[str]) -> DynArray[str]:
-    values = gl.storage.inmem_allocate(DynArray[str])
-    for item in items:
-        values.append(item)
-    return values
 
 
 def _definition_hash(*parts: str) -> str:

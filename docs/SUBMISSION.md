@@ -19,6 +19,11 @@ Glyphwork is locally complete and verified:
 - Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
 - Evidence: `docs/deployment-evidence/latest.json`
 
+## Production App
+
+- Vercel: `https://glyph-lake.vercel.app`
+- Deployment: `https://glyph-6c7hplm84-auras-projects-2f862c53.vercel.app`
+
 ## Before Final Submission
 
 1. Optional redeploy with a funded Studionet signer:

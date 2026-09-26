@@ -63,3 +63,19 @@ Initial readbacks:
 - `conservation()`: `[0, 0, 0, 0]`
 
 Full deployment receipts and schemas are recorded in `docs/deployment-evidence/latest.json`.
+
+## Production Hosting
+
+Deployed on Vercel.
+
+- Project: `glyph`
+- Production URL: `https://glyph-lake.vercel.app`
+- Deployment URL: `https://glyph-6c7hplm84-auras-projects-2f862c53.vercel.app`
+- Deployment ID: `dpl_7sTBg3YV2iWG1SSfdBDyjrZdjhgy`
+
+Persistent Vercel environment variables are configured for Production, Preview, and Development:
+
+- `NEXT_PUBLIC_GLYPHWORK_TASKS_ADDRESS`
+- `NEXT_PUBLIC_GLYPHWORK_VAULT_ADDRESS`
+- `NEXT_PUBLIC_STUDIONET_RPC`
+- `NEXT_PUBLIC_STUDIONET_CHAIN_ID`

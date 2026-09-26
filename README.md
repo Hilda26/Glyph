@@ -42,6 +42,10 @@ Current Studionet deployment:
 - Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
 - Evidence: `docs/deployment-evidence/latest.json`
 
+Current production app:
+
+- Vercel: https://glyph-lake.vercel.app
+
 Deploy order:
 
 1. Deploy `glyphwork_tasks.py`.

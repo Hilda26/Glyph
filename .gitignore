@@ -11,3 +11,5 @@ test-results
 .env.local
 19_GLYPHWORK_ONE_SHOT_BUILD_PROMPT.md
 npm-debug.log*
+
+.vercel

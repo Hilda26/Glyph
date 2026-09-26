@@ -4176,5 +4176,19 @@
   },
   "notes": [
     "Initial deployment and binding complete. Fresh contracts have no bounties or submissions yet. Funded demo bounty transactions should be appended after running the demo path."
-  ]
+  ],
+  "hosting": {
+    "provider": "Vercel",
+    "project": "glyph",
+    "productionUrl": "https://glyph-lake.vercel.app",
+    "deploymentUrl": "https://glyph-6c7hplm84-auras-projects-2f862c53.vercel.app",
+    "deploymentId": "dpl_7sTBg3YV2iWG1SSfdBDyjrZdjhgy",
+    "inspectorUrl": "https://vercel.com/auras-projects-2f862c53/glyph/7sTBg3YV2iWG1SSfdBDyjrZdjhgy",
+    "environmentVariables": [
+      "NEXT_PUBLIC_GLYPHWORK_TASKS_ADDRESS",
+      "NEXT_PUBLIC_GLYPHWORK_VAULT_ADDRESS",
+      "NEXT_PUBLIC_STUDIONET_RPC",
+      "NEXT_PUBLIC_STUDIONET_CHAIN_ID"
+    ]
+  }
 }

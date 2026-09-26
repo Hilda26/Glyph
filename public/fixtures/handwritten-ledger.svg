@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <rect width="960" height="720" fill="#efe4cf"/>
+  <path d="M82 52h796v610H82z" fill="#fbf2dc" stroke="#191714" stroke-width="3"/>
+  <path d="M122 128h716M122 198h716M122 268h716M122 338h716M122 408h716M122 478h716M122 548h716M246 98v492M430 98v492M618 98v492" stroke="#315b9a" stroke-opacity=".42" stroke-width="2"/>
+  <text x="122" y="96" font-family="Georgia,serif" font-size="34" fill="#191714">Municipal Supply Ledger</text>
+  <text x="132" y="170" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">June 5 1893</text>
+  <text x="270" y="170" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">North Wharf</text>
+  <text x="454" y="170" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">lamp oil</text>
+  <text x="646" y="170" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">12 tins delivered</text>
+  <text x="132" y="240" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">June 6 1893</text>
+  <text x="270" y="240" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">Canal Store</text>
+  <text x="454" y="240" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">rope</text>
+  <text x="646" y="240" font-family="Comic Sans MS, Segoe Print, cursive" font-size="30" fill="#191714">4 coils</text>
+  <path d="M710 458c44-28 96-16 112 22 18 44-22 83-66 76-45-7-72-63-46-98z" fill="#ad8a50" opacity=".13"/>
+</svg>
+

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --vellum: #efe4cf;
+  --archival-black: #191714;
+  --registry-blue: #315b9a;
+  --pencil-red: #b94b45;
+  --brass: #ad8a50;
+  --faded-green: #72806a;
+  --paper: #f8f0df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--vellum);
+  color: var(--archival-black);
+  font-family: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--registry-blue);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--registry-blue);
+  color: white;
+}
+
+.display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  letter-spacing: 0;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.archive-paper {
+  background:
+    linear-gradient(rgba(25, 23, 20, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 23, 20, 0.04) 1px, transparent 1px),
+    var(--paper);
+  background-size: 100% 32px, 32px 100%;
+}
+
+.stamp {
+  border: 2px solid currentColor;
+  color: var(--pencil-red);
+  transform: rotate(-3deg);
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

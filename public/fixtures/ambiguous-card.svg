@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <rect width="960" height="720" fill="#e6dac4"/>
+  <path d="M120 96h720v508H120z" fill="#f7eed9" stroke="#191714" stroke-width="3"/>
+  <path d="M176 182h608M176 262h608M176 342h608M176 422h608M176 502h608" stroke="#191714" stroke-opacity=".18" stroke-width="2"/>
+  <text x="170" y="150" font-family="Georgia,serif" font-size="40" fill="#191714">Accession Card</text>
+  <text x="186" y="232" font-family="Courier New,monospace" font-size="31" fill="#191714">Date: 1912</text>
+  <text x="186" y="312" font-family="Courier New,monospace" font-size="31" fill="#191714">Catalog: K-17?</text>
+  <text x="186" y="392" font-family="Courier New,monospace" font-size="31" fill="#191714">Object: brass key</text>
+  <text x="186" y="472" font-family="Courier New,monospace" font-size="31" fill="#191714">Condition: oxidized</text>
+  <ellipse cx="438" cy="302" rx="90" ry="34" fill="#191714" opacity=".28"/>
+  <path d="M594 446c60-70 144-28 128 42-16 68-126 82-170 20z" fill="#72806a" opacity=".19"/>
+</svg>
+

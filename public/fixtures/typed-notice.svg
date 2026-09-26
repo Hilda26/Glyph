@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <rect width="960" height="720" fill="#f8f0df"/>
+  <path d="M72 68h816v584H72z" fill="#fff8e8" stroke="#191714" stroke-width="3"/>
+  <path d="M116 122h728M116 178h728M116 234h728M116 290h728M116 346h728M116 402h728M116 458h728M116 514h728" stroke="#191714" stroke-opacity=".18" stroke-width="2"/>
+  <text x="480" y="130" text-anchor="middle" font-family="Georgia,serif" font-size="44" fill="#191714">NOTICE TO HARBOR CARRIERS</text>
+  <text x="140" y="212" font-family="Courier New,monospace" font-size="28" fill="#191714">Port office circular 17. Public record.</text>
+  <text x="140" y="274" font-family="Courier New,monospace" font-size="28" fill="#191714">North gate opens at six bells.</text>
+  <text x="140" y="336" font-family="Courier New,monospace" font-size="28" fill="#191714">Lamp oil: twelve tins received.</text>
+  <text x="140" y="398" font-family="Courier New,monospace" font-size="28" fill="#191714">Clerk: Mara Vell, ledger mark B-41.</text>
+  <text x="140" y="460" font-family="Courier New,monospace" font-size="28" fill="#191714">Filed for municipal archive, 1908.</text>
+  <circle cx="760" cy="546" r="70" fill="none" stroke="#b94b45" stroke-width="7"/>
+  <text x="760" y="556" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#b94b45">PUBLIC</text>
+</svg>
+

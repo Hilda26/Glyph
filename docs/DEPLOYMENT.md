@@ -50,19 +50,21 @@ The script reads the key from process environment, deploys Tasks, deploys Vault 
 Deployed to Studionet 61999.
 
 - Signer: `0xd5Fbe8dbfFdac681FA50Ed8D082d70Ce43080B1C`
-- Tasks: `0x0fcbeFD1D4e0B36f57E8F9B0d143F3FFc1c5D593`
-- Vault: `0xaF0B724b2a990Fc4E2C5D57db21Aea2b3Fb71507`
-- Tasks deploy tx: `0x99d7c1bda1fb011556d1fcd0e3b19e4bf4c2b79c2b3b88a6ffdf3de7d3105b44`
-- Vault deploy tx: `0x5fccde3cd1f60099674629998f70a1e9bafdf0a68d2c2fcc08b5895a4a9e898e`
-- Vault binding tx: `0x0c66363f08e2b5be3eed01492dbf4dcef720f9063e32e86635488074ad076b63`
+- Tasks: `0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1`
+- Vault: `0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495`
+- Tasks deploy tx: `0x1c168e027e943e81fe54b2e09a209a877be5d838e84515bd4e1b6f3dbe6f6fc0`
+- Vault deploy tx: `0xc31d6e46f4cae63eacac63ca0c6da402666ea845091ec262bc377613c9132f0c`
+- Vault binding tx: `0xb2f16617d68e3aa27e23d38d6dd18c693c7c850bc55172cf2bb06e20885fa122`
 
-Initial readbacks:
+Latest live demo readbacks:
 
-- `get_bounty_count()`: `0`
-- `get_submission_count()`: `0`
-- `conservation()`: `[0, 0, 0, 0]`
+- Bounty `2`: `ACCEPTED`
+- Submission `2`: `ACCEPT`
+- Source match: `MATCH`
+- Accuracy: `ACCURATE`
+- `conservation()`: `[2000000000000000, 0, 0, 2000000000000000]`
 
-Full deployment receipts and schemas are recorded in `docs/deployment-evidence/latest.json`.
+Full deployment receipts are recorded in `docs/deployment-evidence/latest.json`. The funded create/fund/open/submit/evaluate lifecycle is recorded in `docs/deployment-evidence/live-demo.json`.
 
 ## Production Hosting
 
@@ -70,8 +72,8 @@ Deployed on Vercel.
 
 - Project: `glyph`
 - Production URL: `https://glyph-lake.vercel.app`
-- Deployment URL: `https://glyph-6c7hplm84-auras-projects-2f862c53.vercel.app`
-- Deployment ID: `dpl_7sTBg3YV2iWG1SSfdBDyjrZdjhgy`
+- Deployment URL: `https://glyph-gn9r35our-auras-projects-2f862c53.vercel.app`
+- Deployment ID: `dpl_CT4AhrJ3r8CpkuiitpVwL78NMuKb`
 
 Persistent Vercel environment variables are configured for Production, Preview, and Development:
 

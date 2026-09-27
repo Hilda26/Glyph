@@ -1,0 +1,80 @@
+{
+  "recordedAt": "2026-09-26T23:53:47.804Z",
+  "network": {
+    "name": "Studionet",
+    "chainId": 61999,
+    "rpc": "https://studio.genlayer.com/api"
+  },
+  "signer": "0xd5Fbe8dbfFdac681FA50Ed8D082d70Ce43080B1C",
+  "source": {
+    "url": "https://raw.githubusercontent.com/Hilda26/Glyph/main/public/fixtures/typed-notice.png",
+    "bytes": 36230,
+    "sha256": "2a5d5e8f910a54cfb8625d8962b2c701f3c45bc1682a7bfef5aec13895b38b7c"
+  },
+  "contracts": {
+    "tasks": "0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1",
+    "vault": "0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495"
+  },
+  "bountyId": "2",
+  "submissionId": "2",
+  "rewardWei": "1000000000000000",
+  "deadline": 1791071411,
+  "transactions": {
+    "createDraft": "0x0a041c900c9d78d4b840aa176d222cfe7dbe1e0957cde45fdcc84aa7c54c7ca6",
+    "fund": "0xd9c4d26016205137be35f512f7f31537d1eb0e843ad08475d041fc9418d79d08",
+    "open": "0x43463bc1e4f65c25dfef7d66a6383daa552a5105eff2469e50e6d5e3912a033c",
+    "submit": "0x7affe30476137c8c5e7fb0db1523a89a3646b26ee19ad5a5c9de2b070f315cbe",
+    "evaluate": "0xcf9d733cfdad271169342d839decdb888ff8a774b627ddb327ebc4678c106481"
+  },
+  "explorer": {
+    "createDraft": "https://explorer-studio.genlayer.com/transactions/0x0a041c900c9d78d4b840aa176d222cfe7dbe1e0957cde45fdcc84aa7c54c7ca6",
+    "fund": "https://explorer-studio.genlayer.com/transactions/0xd9c4d26016205137be35f512f7f31537d1eb0e843ad08475d041fc9418d79d08",
+    "open": "https://explorer-studio.genlayer.com/transactions/0x43463bc1e4f65c25dfef7d66a6383daa552a5105eff2469e50e6d5e3912a033c",
+    "submit": "https://explorer-studio.genlayer.com/transactions/0x7affe30476137c8c5e7fb0db1523a89a3646b26ee19ad5a5c9de2b070f315cbe",
+    "evaluate": "https://explorer-studio.genlayer.com/transactions/0xcf9d733cfdad271169342d839decdb888ff8a774b627ddb327ebc4678c106481"
+  },
+  "readbacks": {
+    "bounty": {
+      "accept_minor_errors": true,
+      "accepted_worker": "0xd5fbe8dbffdac681fa50ed8d082d70ce43080b1c",
+      "active_submission_id": "2",
+      "attempts": 1,
+      "deadline": 1791071411,
+      "definition_hash": "470132c9df1d2c8f0ea5a9343cdb209c4661c7678d57f8254a9c220a186df2c7",
+      "expected_hash": "2a5d5e8f910a54cfb8625d8962b2c701f3c45bc1682a7bfef5aec13895b38b7c",
+      "field_labels_json": "[]",
+      "id": "2",
+      "max_attempts": 3,
+      "reward_wei": 1000000000000000,
+      "schema_mode": "PLAIN_TEXT",
+      "source_label": "GitHub raw typed notice fixture",
+      "source_unavailable_at": 0,
+      "source_url": "https://raw.githubusercontent.com/Hilda26/Glyph/main/public/fixtures/typed-notice.png",
+      "sponsor": "0xd5fbe8dbffdac681fa50ed8d082d70ce43080b1c",
+      "status": "ACCEPTED",
+      "title": "Live harbor notice transcription",
+      "transcription_rules": "Transcribe all visible lines exactly enough to preserve line order. Minor punctuation variance is acceptable."
+    },
+    "submission": {
+      "accuracy": "ACCURATE",
+      "bounty_id": "2",
+      "completeness": "COMPLETE",
+      "field_findings_json": "[{\"field\": \"Header\", \"status\": \"CORRECT\"}, {\"field\": \"Circular Info\", \"status\": \"CORRECT\"}, {\"field\": \"Gate Info\", \"status\": \"CORRECT\"}, {\"field\": \"Inventory\", \"status\": \"CORRECT\"}, {\"field\": \"Clerk/Ledger\", \"status\": \"CORRECT\"}, {\"field\": \"Archive Date\", \"status\": \"CORRECT\"}]",
+      "id": "2",
+      "note": "Live test submission from deployed Glyphwork app flow.",
+      "reason": "The transcription accurately reflects all printed text in the image, maintaining line order and content precision.",
+      "result": "ACCEPT",
+      "source_match": "MATCH",
+      "timestamp": "2026-09-26T23:52:15.238919+00:00",
+      "transcription": "NOTICE TO HARBOR CARRIERS\nPort office circular 17. Public record.\nNorth gate opens at six bells.\nLamp oil: twelve tins received.\nClerk: Mara Vell, ledger mark B-41.\nFiled for municipal archive, 1908.",
+      "uncertainty": false,
+      "worker": "0xd5fbe8dbffdac681fa50ed8d082d70ce43080b1c"
+    },
+    "conservation": [
+      2000000000000000,
+      0,
+      0,
+      2000000000000000
+    ]
+  }
+}

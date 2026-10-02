@@ -28,6 +28,8 @@ export type BountySummary = {
   expectedHash: string;
   schemaMode: SchemaMode;
   fieldLabels: string[];
+  transcriptionRules: string;
+  acceptMinorErrors: boolean;
   rewardWei: bigint;
   deadline: number;
   attempts: number;
@@ -43,9 +45,9 @@ export type SubmissionReceipt = {
   result: EvaluationResult;
   reason: string;
   paid: boolean;
+  refunded: boolean;
   sourceMatch: "MATCH" | "MISMATCH" | "UNCLEAR";
   completeness: "COMPLETE" | "MINOR_OMISSIONS" | "MAJOR_OMISSIONS" | "UNCLEAR";
   accuracy: "ACCURATE" | "MINOR_ERRORS" | "MATERIAL_ERRORS" | "UNCLEAR";
   transcript: string;
 };
-

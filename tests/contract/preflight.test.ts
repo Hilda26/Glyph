@@ -18,6 +18,7 @@ describe("contract source preflight", () => {
     expect(tasks).toContain("gl.vm.run_nondet_unsafe(leader_fn, validator_fn)");
     expect(tasks).toContain("images=[image]");
     expect(tasks).toContain("candidate[\"field_findings\"] == expected[\"field_findings\"]");
+    expect(tasks).toContain("refund_unavailable(bounty_id)");
+    expect(tasks).toContain("_covers_configured_fields(review[\"field_findings\"], labels)");
   });
 });
-

@@ -36,6 +36,9 @@ export default async function FolioPage({ params }: { params: Promise<{ id: stri
           <div><dt className="font-bold">Status</dt><dd>{bounty.status}</dd></div>
           <div><dt className="font-bold">Source SHA-256</dt><dd className="mono break-all">{bounty.expectedHash}</dd></div>
           <div><dt className="font-bold">Definition hash</dt><dd className="mono">{bounty.definitionHash}</dd></div>
+          <div><dt className="font-bold">Transcription rules</dt><dd>{bounty.transcriptionRules}</dd></div>
+          <div><dt className="font-bold">Minor-error policy</dt><dd>{bounty.acceptMinorErrors ? "Accepted" : "Not accepted"}</dd></div>
+          {bounty.schemaMode === "KEY_VALUE" && <div><dt className="font-bold">Configured fields</dt><dd className="mono">{bounty.fieldLabels.join(", ")}</dd></div>}
         </dl>
         <BountyActions bounty={bounty} />
         <Link href={`/t/${id}/transcribe`} className="mt-8 inline-block rounded bg-[#191714] px-5 py-3 font-bold text-[#EFE4CF]">Open workbench</Link>

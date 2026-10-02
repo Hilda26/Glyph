@@ -93,7 +93,28 @@ export async function readSubmission(id: string): Promise<SubmissionReceipt> {
     args: [id],
     transactionHashVariant: TransactionHashVariant.LATEST_FINAL,
   });
-  return normalizeSubmission(raw);
+  const normalized = normalizeSubmission(raw);
+  const settlement = await readVaultSettlement(normalized.bountyId);
+  return { ...normalized, ...settlement };
+}
+
+export async function readVaultSettlement(bountyId: string): Promise<Pick<SubmissionReceipt, "paid" | "refunded">> {
+  if (!hasDeployedContracts() || !bountyId) return { paid: false, refunded: false };
+  const client = createReadClient();
+  const readFlag = async (functionName: "was_paid" | "was_refunded") => {
+    try {
+      return Boolean(await client.readContract({
+        address: contractAddresses.vault as `0x${string}`,
+        functionName,
+        args: [bountyId],
+        transactionHashVariant: TransactionHashVariant.LATEST_FINAL,
+      }));
+    } catch {
+      return false;
+    }
+  };
+  const [paid, refunded] = await Promise.all([readFlag("was_paid"), readFlag("was_refunded")]);
+  return { paid, refunded };
 }
 
 export async function writeAndConfirm(options: {
@@ -156,6 +177,8 @@ function normalizeBounty(raw: unknown): BountySummary {
     expectedHash: String(valueOf(item, "expectedHash", "expected_hash") ?? ""),
     schemaMode: String(valueOf(item, "schemaMode", "schema_mode") ?? "PLAIN_TEXT") as BountySummary["schemaMode"],
     fieldLabels: parseFieldLabels(valueOf(item, "fieldLabels", "field_labels") ?? valueOf(item, "fieldLabelsJson", "field_labels_json")),
+    transcriptionRules: String(valueOf(item, "transcriptionRules", "transcription_rules") ?? ""),
+    acceptMinorErrors: Boolean(valueOf(item, "acceptMinorErrors", "accept_minor_errors") ?? false),
     rewardWei: asBigInt(valueOf(item, "rewardWei", "reward_wei")),
     deadline: Number(valueOf(item, "deadline", "deadline") ?? 0),
     attempts: Number(valueOf(item, "attempts", "attempts") ?? 0),
@@ -187,6 +210,7 @@ function normalizeSubmission(raw: unknown): SubmissionReceipt {
     result: String(valueOf(item, "result", "result") || "INCONCLUSIVE") as SubmissionReceipt["result"],
     reason: String(valueOf(item, "reason", "reason") ?? ""),
     paid: false,
+    refunded: false,
     sourceMatch: String(valueOf(item, "sourceMatch", "source_match") || "UNCLEAR") as SubmissionReceipt["sourceMatch"],
     completeness: String(valueOf(item, "completeness", "completeness") || "UNCLEAR") as SubmissionReceipt["completeness"],
     accuracy: String(valueOf(item, "accuracy", "accuracy") || "UNCLEAR") as SubmissionReceipt["accuracy"],

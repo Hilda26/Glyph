@@ -4,8 +4,8 @@ import { createAccount, createClient } from "genlayer-js";
 import { studionet } from "genlayer-js/chains";
 import { TransactionHashVariant, TransactionStatus } from "genlayer-js/types";
 
-const TASKS = "0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1";
-const VAULT = "0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495";
+const TASKS = "0x2Eb674387e52c79A9Ee48ee2a01630c959c9630d";
+const VAULT = "0xd13622176dDA146d2c86DB10c8b2b29bDbEf7BF8";
 const SOURCE_URL = "https://raw.githubusercontent.com/Hilda26/Glyph/main/public/fixtures/typed-notice.png";
 const REWARD_WEI = 1_000_000_000_000_000n;
 

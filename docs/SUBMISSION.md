@@ -15,29 +15,30 @@ Glyphwork is locally complete and verified:
 ## Deployed Contracts
 
 - Network: Studionet `61999`
-- Tasks: `0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1`
-- Vault: `0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495`
+- Tasks: `0x2Eb674387e52c79A9Ee48ee2a01630c959c9630d`
+- Vault: `0xd13622176dDA146d2c86DB10c8b2b29bDbEf7BF8`
 - Deployment evidence: `docs/deployment-evidence/latest.json`
 - Live demo evidence: `docs/deployment-evidence/live-demo.json`
 
 ## Production App
 
 - Vercel: `https://glyph-lake.vercel.app`
-- Deployment: `https://glyph-gn9r35our-auras-projects-2f862c53.vercel.app`
+- Deployment: `https://glyph-4xringx3o-auras-projects-2f862c53.vercel.app`
 
 ## Live Demo Evidence
 
-- Bounty: `2`
-- Submission: `2`
-- Create draft tx: `0x0a041c900c9d78d4b840aa176d222cfe7dbe1e0957cde45fdcc84aa7c54c7ca6`
-- Fund tx: `0xd9c4d26016205137be35f512f7f31537d1eb0e843ad08475d041fc9418d79d08`
-- Verify/open tx: `0x43463bc1e4f65c25dfef7d66a6383daa552a5105eff2469e50e6d5e3912a033c`
-- Submit tx: `0x7affe30476137c8c5e7fb0db1523a89a3646b26ee19ad5a5c9de2b070f315cbe`
-- Evaluate tx: `0xcf9d733cfdad271169342d839decdb888ff8a774b627ddb327ebc4678c106481`
+- Bounty: `1`
+- Submission: `1`
+- Create draft tx: `0x4a083e67c4ace0f234404d7a07733d9cf64d69bb7d91e132870e027882ef6012`
+- Fund tx: `0xfbc6420b123dfec121eb296ce2e9b60900fac92dbaa9c385699be6a051352c47`
+- Verify/open tx: `0xd49863eabfb3e2d8a5979bfa620f903dcafed5b4ea63fac4b6f07b95c20e22b3`
+- Submit tx: `0x7a5db10965977e973ce7fcadaa8f1252669173d41747381854fb5b58b18dfe65`
+- Evaluate tx: `0x23fa92600889b2c4b21c3677a7cdbba2d925940f92abcb23174c424e44704db4`
 - Final bounty status: `ACCEPTED`
 - Final submission result: `ACCEPT`
 - Source match: `MATCH`
 - Accuracy: `ACCURATE`
+- Vault settlement: `was_paid=true`, `was_refunded=false`
 
 ## Optional Submission Media
 

@@ -53,6 +53,10 @@ export const fixtureBounties: BountySummary[] = fixtures.map((fixture, index) =>
   expectedHash: fixture.hash,
   schemaMode: fixture.mode,
   fieldLabels: fixture.fields,
+  transcriptionRules: fixture.mode === "KEY_VALUE"
+    ? "Return every configured field exactly once. Use UNCLEAR instead of guessing illegible values."
+    : "Preserve line order and visible wording. Minor punctuation variance is acceptable.",
+  acceptMinorErrors: index !== 2,
   rewardWei: BigInt(index + 1) * 2_500_000_000_000_000_000n,
   deadline: 1_820_000_000 + index * 86_400,
   attempts: index,
@@ -69,6 +73,7 @@ export const fixtureReceipts: SubmissionReceipt[] = [
     result: "ACCEPT",
     reason: "All required ledger fields are present with minor spelling variance only.",
     paid: true,
+    refunded: false,
     sourceMatch: "MATCH",
     completeness: "COMPLETE",
     accuracy: "MINOR_ERRORS",
@@ -81,6 +86,7 @@ export const fixtureReceipts: SubmissionReceipt[] = [
     result: "INCONCLUSIVE",
     reason: "The catalog mark is materially smudged and cannot be verified independently.",
     paid: false,
+    refunded: false,
     sourceMatch: "MATCH",
     completeness: "MINOR_OMISSIONS",
     accuracy: "UNCLEAR",

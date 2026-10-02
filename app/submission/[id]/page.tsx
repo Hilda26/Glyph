@@ -26,7 +26,9 @@ export default async function SubmissionPage({ params }: { params: Promise<{ id:
         <p>{receipt.reason}</p>
         <pre className="overflow-auto rounded bg-[#191714] p-4 text-[#EFE4CF]">{receipt.transcript}</pre>
         <p className="mono text-sm">Source {receipt.sourceMatch} / completeness {receipt.completeness} / accuracy {receipt.accuracy}</p>
-        <p className="font-bold">{receipt.paid ? "Vault payout finalized" : "No payout released"}</p>
+        <p className="font-bold">
+          {receipt.paid ? "Vault payout finalized" : receipt.refunded ? "Vault refund finalized" : "No Vault settlement released"}
+        </p>
       </div>
       <Link href={`/t/${receipt.bountyId}`} className="mt-6 inline-block font-bold text-[#315B9A]">Return to folio</Link>
     </main>

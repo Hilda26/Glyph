@@ -283,26 +283,29 @@ class Contract(gl.Contract):
         transcription = submission.transcription
         uncertainty = submission.uncertainty
 
-        def run_review():
+        def leader_fn():
             image = _fetch_image_body(source_url)
             actual_hash = hashlib.sha256(image).hexdigest()
             if actual_hash != expected_hash:
-                return _review_result(RESULT_UNAVAILABLE, "MISMATCH", "UNCLEAR", "UNCLEAR", [], "Source hash mismatch.")
+                return _bounded_review(_review_result(RESULT_UNAVAILABLE, "MISMATCH", "UNCLEAR", "UNCLEAR", [], "Source hash mismatch."), labels, schema_mode)
             prompt = _review_prompt(schema_mode, labels, rules, transcription, uncertainty)
-            return gl.nondet.exec_prompt(prompt, images=[image], response_format="json")
-
-        def leader_fn():
-            return _bounded_review(run_review())
+            return _bounded_review(gl.nondet.exec_prompt(prompt, images=[image], response_format="json"), labels, schema_mode)
 
         def validator_fn(leader_result) -> bool:
             if not isinstance(leader_result, gl.vm.Return):
                 return False
-            candidate = _bounded_review(leader_result.calldata)
-            expected = _bounded_review(run_review())
+            candidate = _bounded_review(leader_result.calldata, labels, schema_mode)
+            image = _fetch_image_body(source_url)
+            actual_hash = hashlib.sha256(image).hexdigest()
+            if actual_hash != expected_hash:
+                expected = _bounded_review(_review_result(RESULT_UNAVAILABLE, "MISMATCH", "UNCLEAR", "UNCLEAR", [], "Source hash mismatch."), labels, schema_mode)
+            else:
+                prompt = _review_prompt(schema_mode, labels, rules, transcription, uncertainty)
+                expected = _bounded_review(gl.nondet.exec_prompt(prompt, images=[image], response_format="json"), labels, schema_mode)
             return _materially_same(candidate, expected, schema_mode)
 
         review = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
-        mapped = _map_policy(review, schema_mode, accept_minor_errors)
+        mapped = _map_policy(review, schema_mode, labels, accept_minor_errors)
 
         submission.result = mapped
         submission.source_match = review["source_match"]
@@ -323,8 +326,9 @@ class Contract(gl.Contract):
         elif mapped == RESULT_UNAVAILABLE:
             if bounty.source_unavailable_at == u256(0):
                 bounty.source_unavailable_at = u256(_now())
-            bounty.status = STATUS_OPEN
+            bounty.status = STATUS_EXPIRED
             self.bounties[bounty_id] = bounty
+            GlyphworkVault(self.vault).emit(on="finalized").refund_unavailable(bounty_id)
         else:
             bounty.status = STATUS_OPEN if bounty.attempts < bounty.max_attempts else STATUS_EXPIRED
             self.bounties[bounty_id] = bounty
@@ -475,7 +479,7 @@ def _review_result(result: str, source_match: str, completeness: str, accuracy: 
     }
 
 
-def _bounded_review(raw) -> dict:
+def _bounded_review(raw, labels: list[str], schema_mode: str) -> dict:
     if not isinstance(raw, dict):
         return _review_result(RESULT_INCONCLUSIVE, "UNCLEAR", "UNCLEAR", "UNCLEAR", [], "Malformed model output.")
     result = str(raw.get("result", RESULT_INCONCLUSIVE))
@@ -490,13 +494,10 @@ def _bounded_review(raw) -> dict:
         completeness = "UNCLEAR"
     if accuracy not in ["ACCURATE", "MINOR_ERRORS", "MATERIAL_ERRORS", "UNCLEAR"]:
         accuracy = "UNCLEAR"
-    findings = []
-    for item in list(raw.get("field_findings", []))[:MAX_FIELDS]:
-        field = str(item.get("field", ""))[:MAX_FIELD_LEN]
-        status = str(item.get("status", "UNCLEAR"))
-        if status not in ["CORRECT", "INCORRECT", "UNCLEAR"]:
-            status = "UNCLEAR"
-        findings.append({"field": field, "status": status})
+    findings = _bounded_findings(raw, labels, schema_mode)
+    if schema_mode == "KEY_VALUE" and not _covers_configured_fields(findings, labels):
+        if result == RESULT_ACCEPT:
+            result = RESULT_INCONCLUSIVE
     return _review_result(result, source_match, completeness, accuracy, findings, str(raw.get("reason", "")))
 
 
@@ -514,23 +515,75 @@ def _materially_same(candidate: dict, expected: dict, schema_mode: str) -> bool:
     return True
 
 
-def _map_policy(review: dict, schema_mode: str, accept_minor_errors: bool) -> str:
+def _map_policy(review: dict, schema_mode: str, labels: list[str], accept_minor_errors: bool) -> str:
     if review["source_match"] == "MISMATCH":
         return RESULT_REJECT
     if review["result"] == RESULT_UNAVAILABLE:
         return RESULT_UNAVAILABLE
+    if review["result"] == RESULT_REJECT:
+        return RESULT_REJECT
+    if review["result"] == RESULT_INCONCLUSIVE:
+        return RESULT_INCONCLUSIVE
     if review["accuracy"] == "MATERIAL_ERRORS" or review["completeness"] == "MAJOR_OMISSIONS":
         return RESULT_REJECT
     if review["accuracy"] == "UNCLEAR" or review["completeness"] == "UNCLEAR" or review["source_match"] != "MATCH":
         return RESULT_INCONCLUSIVE
     if schema_mode == "KEY_VALUE":
+        if not _covers_configured_fields(review["field_findings"], labels):
+            return RESULT_INCONCLUSIVE
         for finding in review["field_findings"]:
             if finding["status"] == "INCORRECT":
                 return RESULT_REJECT
             if finding["status"] == "UNCLEAR":
                 return RESULT_INCONCLUSIVE
+    if review["result"] != RESULT_ACCEPT:
+        return RESULT_INCONCLUSIVE
     minor_ok = review["accuracy"] == "ACCURATE" or (accept_minor_errors and review["accuracy"] == "MINOR_ERRORS")
     complete_ok = review["completeness"] == "COMPLETE" or review["completeness"] == "MINOR_OMISSIONS"
     if minor_ok and complete_ok:
         return RESULT_ACCEPT
     return RESULT_INCONCLUSIVE
+
+
+def _bounded_findings(raw: dict, labels: list[str], schema_mode: str) -> list[dict]:
+    if schema_mode != "KEY_VALUE":
+        findings = []
+        for item in list(raw.get("field_findings", []))[:MAX_FIELDS]:
+            status = str(item.get("status", "UNCLEAR"))
+            if status not in ["CORRECT", "INCORRECT", "UNCLEAR"]:
+                status = "UNCLEAR"
+            findings.append({"field": str(item.get("field", ""))[:MAX_FIELD_LEN], "status": status})
+        return findings
+
+    statuses: dict[str, str] = {}
+    invalid = False
+    for item in list(raw.get("field_findings", []))[:MAX_FIELDS]:
+        field = str(item.get("field", "")).strip().lower()[:MAX_FIELD_LEN]
+        status = str(item.get("status", "UNCLEAR"))
+        if status not in ["CORRECT", "INCORRECT", "UNCLEAR"]:
+            status = "UNCLEAR"
+        if field not in labels or field in statuses:
+            invalid = True
+        else:
+            statuses[field] = status
+
+    findings = []
+    for label in labels:
+        findings.append({"field": label, "status": statuses.get(label, "UNCLEAR")})
+    if invalid:
+        for index in range(len(findings)):
+            if findings[index]["status"] == "CORRECT":
+                findings[index] = {"field": findings[index]["field"], "status": "UNCLEAR"}
+    return findings
+
+
+def _covers_configured_fields(findings: list[dict], labels: list[str]) -> bool:
+    if len(findings) != len(labels):
+        return False
+    seen: list[str] = []
+    for index in range(len(labels)):
+        field = str(findings[index].get("field", "")).strip().lower()
+        if field != labels[index] or field in seen:
+            return False
+        seen.append(field)
+    return True

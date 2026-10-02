@@ -38,8 +38,8 @@ NEXT_PUBLIC_STUDIONET_CHAIN_ID=61999
 
 Current Studionet deployment:
 
-- Tasks: `0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1`
-- Vault: `0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495`
+- Tasks: `0x2Eb674387e52c79A9Ee48ee2a01630c959c9630d`
+- Vault: `0xd13622176dDA146d2c86DB10c8b2b29bDbEf7BF8`
 - Evidence: `docs/deployment-evidence/latest.json`
 - Live demo evidence: `docs/deployment-evidence/live-demo.json`
 

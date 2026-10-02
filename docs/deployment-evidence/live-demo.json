@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-09-26T23:53:47.804Z",
+  "recordedAt": "2026-10-02T08:37:16.844Z",
   "network": {
     "name": "Studionet",
     "chainId": 61999,
@@ -12,38 +12,38 @@
     "sha256": "2a5d5e8f910a54cfb8625d8962b2c701f3c45bc1682a7bfef5aec13895b38b7c"
   },
   "contracts": {
-    "tasks": "0x5D28D755EEeD3a3C440103d9c7ca2068A640B6A1",
-    "vault": "0xD2D1AdB4AD94Ea6769Ef23271b24771E97a0B495"
+    "tasks": "0x2Eb674387e52c79A9Ee48ee2a01630c959c9630d",
+    "vault": "0xd13622176dDA146d2c86DB10c8b2b29bDbEf7BF8"
   },
-  "bountyId": "2",
-  "submissionId": "2",
+  "bountyId": "1",
+  "submissionId": "1",
   "rewardWei": "1000000000000000",
-  "deadline": 1791071411,
+  "deadline": 1791534778,
   "transactions": {
-    "createDraft": "0x0a041c900c9d78d4b840aa176d222cfe7dbe1e0957cde45fdcc84aa7c54c7ca6",
-    "fund": "0xd9c4d26016205137be35f512f7f31537d1eb0e843ad08475d041fc9418d79d08",
-    "open": "0x43463bc1e4f65c25dfef7d66a6383daa552a5105eff2469e50e6d5e3912a033c",
-    "submit": "0x7affe30476137c8c5e7fb0db1523a89a3646b26ee19ad5a5c9de2b070f315cbe",
-    "evaluate": "0xcf9d733cfdad271169342d839decdb888ff8a774b627ddb327ebc4678c106481"
+    "createDraft": "0x4a083e67c4ace0f234404d7a07733d9cf64d69bb7d91e132870e027882ef6012",
+    "fund": "0xfbc6420b123dfec121eb296ce2e9b60900fac92dbaa9c385699be6a051352c47",
+    "open": "0xd49863eabfb3e2d8a5979bfa620f903dcafed5b4ea63fac4b6f07b95c20e22b3",
+    "submit": "0x7a5db10965977e973ce7fcadaa8f1252669173d41747381854fb5b58b18dfe65",
+    "evaluate": "0x23fa92600889b2c4b21c3677a7cdbba2d925940f92abcb23174c424e44704db4"
   },
   "explorer": {
-    "createDraft": "https://explorer-studio.genlayer.com/transactions/0x0a041c900c9d78d4b840aa176d222cfe7dbe1e0957cde45fdcc84aa7c54c7ca6",
-    "fund": "https://explorer-studio.genlayer.com/transactions/0xd9c4d26016205137be35f512f7f31537d1eb0e843ad08475d041fc9418d79d08",
-    "open": "https://explorer-studio.genlayer.com/transactions/0x43463bc1e4f65c25dfef7d66a6383daa552a5105eff2469e50e6d5e3912a033c",
-    "submit": "https://explorer-studio.genlayer.com/transactions/0x7affe30476137c8c5e7fb0db1523a89a3646b26ee19ad5a5c9de2b070f315cbe",
-    "evaluate": "https://explorer-studio.genlayer.com/transactions/0xcf9d733cfdad271169342d839decdb888ff8a774b627ddb327ebc4678c106481"
+    "createDraft": "https://explorer-studio.genlayer.com/transactions/0x4a083e67c4ace0f234404d7a07733d9cf64d69bb7d91e132870e027882ef6012",
+    "fund": "https://explorer-studio.genlayer.com/transactions/0xfbc6420b123dfec121eb296ce2e9b60900fac92dbaa9c385699be6a051352c47",
+    "open": "https://explorer-studio.genlayer.com/transactions/0xd49863eabfb3e2d8a5979bfa620f903dcafed5b4ea63fac4b6f07b95c20e22b3",
+    "submit": "https://explorer-studio.genlayer.com/transactions/0x7a5db10965977e973ce7fcadaa8f1252669173d41747381854fb5b58b18dfe65",
+    "evaluate": "https://explorer-studio.genlayer.com/transactions/0x23fa92600889b2c4b21c3677a7cdbba2d925940f92abcb23174c424e44704db4"
   },
   "readbacks": {
     "bounty": {
       "accept_minor_errors": true,
       "accepted_worker": "0xd5fbe8dbffdac681fa50ed8d082d70ce43080b1c",
-      "active_submission_id": "2",
+      "active_submission_id": "1",
       "attempts": 1,
-      "deadline": 1791071411,
-      "definition_hash": "470132c9df1d2c8f0ea5a9343cdb209c4661c7678d57f8254a9c220a186df2c7",
+      "deadline": 1791534778,
+      "definition_hash": "798bb87cac4bc1dc5c12698af1d031e20657527924c41388cf668b56a6486c56",
       "expected_hash": "2a5d5e8f910a54cfb8625d8962b2c701f3c45bc1682a7bfef5aec13895b38b7c",
       "field_labels_json": "[]",
-      "id": "2",
+      "id": "1",
       "max_attempts": 3,
       "reward_wei": 1000000000000000,
       "schema_mode": "PLAIN_TEXT",
@@ -57,24 +57,28 @@
     },
     "submission": {
       "accuracy": "ACCURATE",
-      "bounty_id": "2",
+      "bounty_id": "1",
       "completeness": "COMPLETE",
-      "field_findings_json": "[{\"field\": \"Header\", \"status\": \"CORRECT\"}, {\"field\": \"Circular Info\", \"status\": \"CORRECT\"}, {\"field\": \"Gate Info\", \"status\": \"CORRECT\"}, {\"field\": \"Inventory\", \"status\": \"CORRECT\"}, {\"field\": \"Clerk/Ledger\", \"status\": \"CORRECT\"}, {\"field\": \"Archive Date\", \"status\": \"CORRECT\"}]",
-      "id": "2",
+      "field_findings_json": "[{\"field\": \"title\", \"status\": \"CORRECT\"}, {\"field\": \"line1\", \"status\": \"CORRECT\"}, {\"field\": \"line2\", \"status\": \"CORRECT\"}, {\"field\": \"line3\", \"status\": \"CORRECT\"}, {\"field\": \"line4\", \"status\": \"CORRECT\"}, {\"field\": \"line5\", \"status\": \"CORRECT\"}]",
+      "id": "1",
       "note": "Live test submission from deployed Glyphwork app flow.",
-      "reason": "The transcription accurately reflects all printed text in the image, maintaining line order and content precision.",
+      "reason": "Transcription matches visible text exactly, including line order and content.",
       "result": "ACCEPT",
       "source_match": "MATCH",
-      "timestamp": "2026-09-26T23:52:15.238919+00:00",
+      "timestamp": "2026-10-02T08:34:54.724884+00:00",
       "transcription": "NOTICE TO HARBOR CARRIERS\nPort office circular 17. Public record.\nNorth gate opens at six bells.\nLamp oil: twelve tins received.\nClerk: Mara Vell, ledger mark B-41.\nFiled for municipal archive, 1908.",
       "uncertainty": false,
       "worker": "0xd5fbe8dbffdac681fa50ed8d082d70ce43080b1c"
     },
     "conservation": [
-      2000000000000000,
+      1000000000000000,
+      1000000000000000,
       0,
-      0,
-      2000000000000000
-    ]
+      0
+    ],
+    "vaultSettlement": {
+      "paid": true,
+      "refunded": false
+    }
   }
 }

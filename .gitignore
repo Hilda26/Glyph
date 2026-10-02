@@ -7,6 +7,7 @@ __pycache__
 *.pyc
 playwright-report
 test-results
+artifacts
 .env
 .env.local
 19_GLYPHWORK_ONE_SHOT_BUILD_PROMPT.md

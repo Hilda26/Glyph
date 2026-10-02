@@ -47,6 +47,24 @@ export function TranscriptionForm({ bounty }: { bounty: BountySummary }) {
 
   return (
     <div className="grid gap-4">
+      <section className="grid gap-3 border border-[#191714]/25 bg-[#F8F0DF] p-4">
+        <div>
+          <p className="mono text-xs uppercase tracking-widest text-[#315B9A]">Binding transcription rules</p>
+          <p className="mt-1 text-sm leading-6">{bounty.transcriptionRules}</p>
+        </div>
+        <div className="grid gap-2 text-sm sm:grid-cols-2">
+          <div>
+            <p className="font-bold">Minor-error policy</p>
+            <p>{bounty.acceptMinorErrors ? "Minor OCR or punctuation errors may still be accepted." : "Minor errors are not accepted for this bounty."}</p>
+          </div>
+          {bounty.schemaMode === "KEY_VALUE" && (
+            <div>
+              <p className="font-bold">Required unique fields</p>
+              <p className="mono break-words">{bounty.fieldLabels.join(", ")}</p>
+            </div>
+          )}
+        </div>
+      </section>
       <label className="grid gap-2">
         <span className="mono text-xs uppercase tracking-widest">Transcription</span>
         <textarea className="min-h-[360px] resize-y rounded border border-[#191714]/30 bg-[#F8F0DF] p-4 font-mono text-sm leading-7" value={text} onChange={(event) => setText(event.target.value)} placeholder={placeholder} />
